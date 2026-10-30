@@ -1,0 +1,11 @@
+^\.git$
+^\.github$
+^\.gitignore$
+^.*\.Rproj$
+^\.Rproj\.user$
+^GITHUB_SETUP\.md$
+^DEVELOPMENT_NOTES\.md$
+^VALIDATION\.txt$
+^tools$
+^.*\.Rcheck$
+^lorps_.*\.tar\.gz$

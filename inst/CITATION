@@ -1,0 +1,15 @@
+bibentry(
+  bibtype = "Unpublished",
+  title = "Bayesian Nonparametric Multiple Imputation for High-Dimensional Matrices",
+  author = c(
+    person("Bhargob", "Kakoty"),
+    person("Thierry", "Chekouo"),
+    person("Eric", "Lock")
+  ),
+  note = "Unpublished manuscript.",
+  textVersion = paste(
+    "Kakoty B, Chekouo T, and Lock E.",
+    "Bayesian Nonparametric Multiple Imputation for High-Dimensional Matrices.",
+    "Unpublished manuscript."
+  )
+)

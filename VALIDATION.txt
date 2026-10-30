@@ -1,0 +1,46 @@
+lorps 0.1.0 -- package validation
+Date: 2026-10-30
+
+Platform: Ubuntu 24.04.3 LTS, x86_64 Linux
+R: 4.3.3
+C++ compiler: g++ 13.3.0, C++17
+Dependencies tested: Rcpp 1.1.2, RcppArmadillo 15.6.2-1,
+RcppTN 0.2-2, parallelly 1.48.0, mitools 2.7.
+
+R CMD build: successful.
+R CMD check --no-manual on the exact-byte source archive: 0 errors,
+0 warnings, 1 NOTE. The note reports that the original C++ file does not
+end with a newline. Its bytes are deliberately preserved. R CMD build
+normally appends that newline in its temporary archive; that normalized
+build was also checked and returned Status: OK. The delivered source
+archive restores the original final-byte convention.
+The dependency check printed a network-access message for the CRAN
+index; all required dependencies were already installed.
+Help pages, code/documentation agreement, namespace, native code,
+examples, and tests/regression.R passed.
+
+Additional integration checks:
+- The actual compiled sampler is invoked successfully from lorps_mi().
+- The C++ file is byte-for-byte unchanged relative to the original core.
+  SHA256: 8d8f6a8552a82cabb03d72adb15dcbef4bee822f18d675591f0de856e7c0dfbc
+- One-worker and two-worker PSOCK CV gave identical masks, scores,
+  selected rank, and final imputations under the same seed.
+- Observed values and names are preserved when completing matrices.
+- Complete input returns zero-row imputation storage and unchanged
+  completed matrices, after successful CV if requested.
+- Genuine missing values never contribute validation truth or scores.
+- Changing held-out truth changes scores but not sampler draws at a
+  fixed seed; CV training data and initialization remain unchanged.
+- Exact saved-draw counts, thinning constraints, initialization,
+  seed restoration, input guards, and theorem-based K selection passed.
+- mitools::imputationList(), with(lm(...)), and MIcombine() worked with
+  completed datasets from the actual package.
+- The bundled simulated example executed and reported finite NMSE,
+  coverage, and interval-width summaries.
+
+Windows and macOS are configured in the GitHub Actions workflow but
+have not been run here. No full-size benchmark or default 75-fit CV
+analysis was run for this validation. Short chains test software behavior;
+they do not establish convergence, posterior correctness, or scientific
+performance. See inst/DEVELOPMENT_NOTES.md for the outstanding core
+augmented-state scan review.

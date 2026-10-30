@@ -1,0 +1,14 @@
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+*.Rproj
+*.o
+*.so
+*.dll
+*.dylib
+*.Rcheck/
+lorps_*.tar.gz
+*.zip
+*.rds
+.DS_Store

@@ -1,0 +1,22 @@
+LoRPS: Low-Rank Probit Stick-Breaking Multiple Imputation
+
+Package code is distributed under the GNU General Public License, version 3.
+See COPYING for the license text.
+
+The rcat() categorical sampling function in src/finite_stickbreak_eff.cpp
+is attributed in that source to the hesim project. The upstream project
+distributes this implementation under GPL-3. Its attribution has been
+preserved in the sampler source.
+
+Upstream implementation:
+https://github.com/hesim-dev/hesim/blob/main/inst/include/hesim/stats/distributions.h
+
+Upstream project and license metadata:
+https://github.com/hesim-dev/hesim/blob/main/DESCRIPTION
+
+The hesim project lists Devin Incerti, Jeroen P. Jansen, and Mark Clements
+among its authors. Attribution here concerns the categorical sampling
+routine; hesim is not a runtime dependency of lorps.
+
+Native interfaces depend on Rcpp, RcppArmadillo, and RcppTN. Those packages
+retain their own copyright notices and licenses and are installed separately.

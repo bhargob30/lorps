@@ -1,0 +1,7 @@
+useDynLib(lorps, .registration = TRUE)
+importFrom(Rcpp, evalCpp)
+importFrom(RcppTN, rtn)
+export(lorps_mi)
+export(complete_lorps)
+export(lorps_suggest_K)
+S3method(print, lorps_mi)

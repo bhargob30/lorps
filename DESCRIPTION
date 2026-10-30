@@ -1,0 +1,26 @@
+Package: lorps
+Type: Package
+Title: Low-Rank Probit Stick-Breaking Multiple Imputation
+Version: 0.1.0
+Authors@R: c(
+    person("Bhargob", "Kakoty",
+           role = c("aut", "cre"),
+           email = "kakot001@umn.edu"),
+    person("Thierry", "Chekouo",
+           role = "aut"),
+    person("Eric", "Lock",
+           role = "aut")
+    )
+Description: Provides a Bayesian nonparametric approach to multiple imputation of
+    missing values in high-dimensional data matrices. The method combines
+    flexible mixture modeling with a low-rank structure to borrow information
+    across rows and columns, allowing for complex data distributions while
+    accounting for uncertainty in the missing values.
+License: GPL-3
+Encoding: UTF-8
+Depends: R (>= 4.1.0)
+Imports: Rcpp, RcppTN, parallel, parallelly, stats, utils
+LinkingTo: Rcpp, RcppArmadillo (>= 14.6.0-1), RcppTN
+Suggests: mitools
+SystemRequirements: C++17
+NeedsCompilation: yes
