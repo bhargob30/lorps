@@ -35,15 +35,72 @@ variances can then be combined with \code{mitools::MIcombine}.
 This function does not fit downstream models or pool estimates itself.
 }
 \examples{
-set.seed(21)
-X <- matrix(rnorm(48), 8, 6)
-X[c(1, 9, 23)] <- NA
-fit <- lorps_mi(X, R = 1, K = 2, M = 30, burn_in = 10,
-                seed = 22, verbose = FALSE)
-one <- complete_lorps(fit, 1)
-two <- complete_lorps(fit, c(1, 5))
-point_estimate <- complete_lorps(fit, "mean")
-original <- complete_lorps(fit, 0)
-stopifnot(identical(original, fit$X), length(two) == 2L)
+# Generate a complete matrix with a low-rank underlying signal.
+set.seed(10)
+
+N <- 30
+Q <- 20
+signal_rank <- 2
+
+U <- matrix(rnorm(N * signal_rank), nrow = N)
+V <- matrix(rnorm(Q * signal_rank), nrow = Q)
+
+signal <- tcrossprod(U, V)
+X_true <- signal + matrix(rnorm(N * Q, sd = 0.3), nrow = N)
+
+# Randomly mask 20 percent of the entries.
+missing_index <- sort(
+  sample.int(length(X_true), size = floor(0.20 * length(X_true)))
+)
+
+X <- X_true
+X[missing_index] <- NA_real_
+
+# Fit LoRPS with a fixed tensor rank.
+# These are illustrative settings; convergence should be assessed.
+fit <- lorps_mi(
+  X,
+  R = 2,
+  K = 10,
+  M = 2000,
+  burn_in = 1000,
+  thin = 5,
+  seed = 12,
+  verbose = FALSE
+)
+
+# Construct one completed matrix.
+one <- complete_lorps(fit, action = 1)
+
+# Construct a list containing the first and fifth completed matrices.
+two <- complete_lorps(fit, action = c(1, 5))
+
+# Replace missing entries with their means across imputations.
+point_estimate <- complete_lorps(fit, action = "mean")
+
+# Retrieve the original incomplete matrix.
+original <- complete_lorps(fit, action = 0)
+
+# Evaluate point accuracy using only the artificially masked entries.
+true_missing <- X_true[fit$missing_index]
+imputed_mean <- point_estimate[fit$missing_index]
+
+nmse <- mean((imputed_mean - true_missing)^2) / var(true_missing)
+print(c(NMSE = nmse))
+
+# Check that the original matrix and observed values are preserved.
+stopifnot(
+  identical(original, fit$X),
+  length(two) == 2L,
+  identical(one[!is.na(X)], X[!is.na(X)]),
+  identical(point_estimate[!is.na(X)], X[!is.na(X)])
+)
+
+\dontrun{
+# Construct all completed matrices.
+# For large datasets, processing one completion at a time uses less memory.
+all_completed <- complete_lorps(fit, action = "all")
+length(all_completed)
+}
 }
 \seealso{\code{\link{lorps_mi}}}

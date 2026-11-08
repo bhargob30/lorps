@@ -20,18 +20,16 @@ Consequently, the helper returns
 \deqn{\max\{2,\ 1 + \lceil\log_2(2NQ/\epsilon)\rceil\},}
 where \eqn{\epsilon} is \code{tolerance}. The final stick is forced to one.
 The bound concerns prior joint marginal densities under the stated model.
-It is not a bound on posterior error, imputation RMSE, confidence-interval
-coverage, or the effect of finite MCMC computation.
 
 The package default \code{K = 20} follows the manuscript's practical
-recommendation and simulation setting. It is independent of this helper;
+recommendation. It is independent of this helper;
 the helper does not silently alter the fit. In a 348 by 574 matrix,
 \code{K = 30} makes the raw bound approximately 0.000744.
 }
 \references{
 Kakoty, B., Chekouo, T., and Lock, E.
 \emph{Bayesian Nonparametric Multiple Imputation for High-Dimensional Matrices}.
-Manuscript, Theorem 1.
+Manuscript.
 }
 \examples{
 lorps_suggest_K(348, 574)  # 30

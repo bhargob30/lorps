@@ -12,5 +12,5 @@ retained missing-entry draws. Use \code{\link{complete_lorps}} to construct
 complete datasets and \code{\link{lorps_suggest_K}} to evaluate a sufficient
 truncation level from the manuscript's prior bound.
 }
-\author{Bhargob Kakoty}
+\author{Bhargob Kakoty, Thierry Chekouo, Eric F. Lock}
 \keyword{package}
