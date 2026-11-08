@@ -8,7 +8,7 @@ Authors@R: c(
            email = "kakot001@umn.edu"),
     person("Thierry", "Chekouo",
            role = "aut"),
-    person("Eric", "Lock",
+    person("Eric F.", "Lock",
            role = "aut")
     )
 Description: Provides a Bayesian nonparametric approach to multiple imputation of
